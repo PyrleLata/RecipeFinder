@@ -11,8 +11,9 @@ urlpatterns = [
     path('add-recipe', views.add_recipe),
     path('recipes/<int:recipe_id>', views.recipe_info),
     path('recipes/<int:recipe_id>/edit', views.edit_recipe),
-    # path('recipes/<int:recipe_id>/update', views.update_show),
-    # path('recipes/<int:recipe_id>/destroy', views.destroy_show)
+    path('recipes/<int:recipe_id>/update', views.update_recipe),
+    path('recipes/<int:recipe_id>/destroy', views.destroy_recipe),
+    path('recipes/share', views.share_recipe),
     # path('add-recipe', views.add_recipe),
     # path('meals-list', views.meals_list),
     # path('add-post', views.add_post),

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Recipe Wall</title>
+</head>
+<body>
+    <h1>Welcome {{ user.first_name }} to Your Recipe Finder Wall!</h1>
+    <ul><a href="/logout">log off</a></ul>
+    <h3>Recipes</h3>
+     {% for recipe in recipes %}
+    <h6 action=>{{ recipe.user.first_name }} {{ recipe.user.last_name }} - {{ recipe.created_at }}</h6>
+    <div class="container-fluid">
+        <p>Recipe name:{{ recipe.recipe_name }} for {{ recipe.duration }} minutes only.<br><a href="/recipes/{{ recipe.id }}">Info</p>
+        <!-- <span><a href="/add-like/{{ post.id }}">LIKE</a></span>
+        <span>{{ recipe.likes.count }}</span> -->
+         {% if request.session.user_id == recipe.user.id %}
+        <span><a href="/recipes/{{ recipe.id }}/edit">EDIT</a></span>
+        <span><a href="/recipes/{{ recipe.id }}/destroy">DELETE</a></span>
+        {% endif %}  
+    </div>
+    {% endfor %}
+</body>
+</html>
