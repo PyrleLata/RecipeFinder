@@ -16,6 +16,7 @@ urlpatterns = [
     path('recipes/<int:recipe_id>/share', views.share_recipe),
     path('recipes/wall', views.recipe_wall),
     path('delete-post/<int:post_id>', views.delete_post),
+    #path('/recipes/<int:post_id>', views.
     # path('add-recipe', views.add_recipe),
     # path('meals-list', views.meals_list),
     # path('add-post', views.add_post),

@@ -125,8 +125,8 @@ def destroy_recipe(request, recipe_id):
 
 def share_recipe(request, recipe_id):
     recipe_to_share = Recipe.objects.get(id=recipe_id)
-    Post.objects.create(name = recipe_to_share.recipe_name, time = recipe_to_share.duration, user = recipe_to_share.user)
-
+    #Post.objects.create(name = recipe_to_share.recipe_name, time = recipe_to_share.duration, user = recipe_to_share.user)
+    Post.objects.create(name = recipe_to_share)
     return redirect("/recipes/wall")
 
 def recipe_wall(request):

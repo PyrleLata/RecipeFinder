@@ -64,15 +64,16 @@ class Recipe(models.Model):
 class PostManager(models.Manager):
   def validate_post(self, post_text):
     errors = {}
-    if len(post_text) < 2:
-      errors['length'] = 'Posts must be at least 2 characters'
-    if len(post_text) > 280:
-      errors['length'] = f"Posts can be a max of 281 characters. This post is {len(post_text)}"
+    recipeCheck = self.filter(name=post_text['name'])
+    if recipeCheck:
+      errors['name'] = "That recipe is already shared"
+
     return errors
 
 class Post(models.Model):
   name = models.CharField(max_length=280)
-  time = models.IntegerField() 
+  #time = models.IntegerField()
+  recipe = models.ForeignKey(Recipe, related_name="posts", on_delete=models.CASCADE)
   user = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE)
   created_at = models.DateTimeField(auto_now_add=True, null=True)
   updated_at = models.DateTimeField(auto_now=True, null=True)
