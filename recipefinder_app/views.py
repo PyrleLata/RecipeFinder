@@ -112,16 +112,37 @@ def destroy_recipe(request, recipe_id):
     recipe_to_delete.delete()
     return redirect("/recipes")
 
-def share_recipe(request):
-    if 'user_id' not in request.session:
-        return HttpResponse("<h1>You must be <a href = '/login'>logged in</a> to get to your account</h1>")
+# def share_recipe(request, recipe_id):
+#     if request.method == "GET":
+#         recipe_to_share = Recipe.objects.get(id=recipe_id)
+#         user = User.objects.get(id=request.session['user_id'])
+#         recipes = Recipe.objects.all()
+#         context = {
+#             "recipe": recipe_to_share,
+#             "user": user,
+#         }
+#     return redirect("/recipes/wall")
+
+def share_recipe(request, recipe_id):
+    recipe_to_share = Recipe.objects.get(id=recipe_id)
+    Post.objects.create(name = recipe_to_share.recipe_name, time = recipe_to_share.duration, user = recipe_to_share.user)
+
+    return redirect("/recipes/wall")
+
+def recipe_wall(request):
     user = User.objects.get(id=request.session['user_id'])
-    recipes = Recipe.objects.all()
+    posts = Post.objects.all()
     context = {
-        "recipes": recipes,
         "user": user,
+        "posts": posts,
     }
     return render(request, 'recipe_feed.html', context)
+
+def delete_post(request, post_id):
+    post_to_delete = Post.objects.get(id=post_id) 
+    post_to_delete.delete()
+    return redirect("/recipes/wall")
+
 # def edit_post(request, post_id):
 #   post_to_edit = Post.objects.get(id=tweet_id)
 #   context = {

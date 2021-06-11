@@ -11,9 +11,9 @@
     <ul><a href="/logout">log off</a></ul>
     <h2>My Recipes</h2>
     <p>Do you have meal or recipe ideas? Or do you love to craft new recipe out from available ingredients in your pantry?You can absolutely list them here annd never forget!</p>
-    <table style="width:100%" border="solid">
+    <table style="width:100%">
         <tr>
-            <th>ID</th>
+            
             <th>Name</th>
             <th>Ingredients</th>
             <th>Prep/Cooking Time</th>
@@ -22,11 +22,11 @@
         {% for recipe in recipes %}
             {% if request.session.user_id == recipe.user.id %} 
         <tr>
-            <td>{{ recipe.id }}</td>
+            
             <td>{{ recipe.recipe_name }}</td>
             <td>{{ recipe.ingredients }}</td>
             <td>{{ recipe.duration }}</td>
-            <td><a href="/recipes/{{ recipe.id }}">Show | </a>
+            <td><a href="/recipes/{{ recipe.id }}">View | </a>
                 <a href="/recipes/{{ recipe.id }}/edit">Edit | </a>
                 <a href="/recipes/{{ recipe.id }}/share">Share | </a>
                 <a href="/recipes/{{ recipe.id }}/destroy">Delete</a></td>
